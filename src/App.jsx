@@ -3,6 +3,7 @@ import Landing from "./pages/Landing"
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import Home from "./pages/Home";
+import Categories from "./pages/Categories";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/categories" element={<Categories />} />
       </Routes>
     </Router>
   );
