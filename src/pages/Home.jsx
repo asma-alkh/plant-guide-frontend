@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; 
 import { FaSearch, FaHeart } from "react-icons/fa";
 import bgImage from "../assets/bgImage/plant5.jpg";
 import bgIndoor from "../assets/bgImage/indoor.jpg";
@@ -7,7 +7,7 @@ import bgOutdoor from "../assets/bgImage/outdoor.jpg";
 
 export default function Home() {
   const navigate = useNavigate();
-  const categoriesRef = useRef(null); 
+  const categoriesRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -21,22 +21,26 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-cover bg-center text-white" style={{ backgroundImage: `url(${bgImage})` }}>
+    <div
+      className="min-h-screen bg-cover bg-center text-white relative"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
       <div className="absolute inset-0 bg-black/30"></div>
-
       <div className="relative z-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl w-[95%] max-w-[1400px] mx-auto p-10 mt-10 flex flex-col space-y-10">
         {/* Navbar */}
         <nav className="flex justify-between items-center border-b border-white/20 pb-4">
           <div className="flex space-x-6 text-sm font-semibold tracking-wide">
-            <a href="#" className="hover:text-green-200">Soils</a>
-            <a href="#" className="hover:text-green-200">Soils</a>
+            <a href="#" className="hover:text-green-200">ABOUT</a>
+            <a href="#" className="hover:text-green-200">SOILS</a>
             <a href="#" className="hover:text-green-200">CONTACT</a>
+            <a href="#" className="hover:text-green-200">S</a>
           </div>
           <div className="flex space-x-4 text-lg">
             <FaSearch className="hover:text-green-300 cursor-pointer" />
             <FaHeart className="hover:text-green-300 cursor-pointer" />
           </div>
         </nav>
+
         <div className="flex flex-col md:flex-row justify-between items-center gap-10">
           <div className="w-full md:w-1/2 bg-white/10 rounded-xl overflow-hidden shadow-lg">
             <img
@@ -45,6 +49,7 @@ export default function Home() {
               className="object-cover w-full h-[400px] lg:aspect-square opacity-90 hover:opacity-100 transition duration-500"
             />
           </div>
+
           <div className="w-full md:w-1/2 text-left">
             <h1 className="text-6xl font-extrabold mb-4 text-white drop-shadow-md">
               Plant Guide
@@ -61,7 +66,7 @@ export default function Home() {
             <div className="flex gap-5">
               <button
                 onClick={scrollToCategories}
-                className="bg-[#4C763B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#3a5e2f] transition shadow-lg"
+                className="relative z-50 bg-[#4C763B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#3a5e2f] transition shadow-lg"
               >
                 Explore Plants
               </button>
@@ -70,48 +75,53 @@ export default function Home() {
         </div>
       </div>
 
-      {/*categories section */}
+      {/*(Categories Section) */}
       <section
-  ref={categoriesRef}
-  className="relative z-10 mt-20 bg-[#E8EEE7] py-20 text-center text-green-900 rounded-t-[3rem] shadow-inner"
->
-  <h1 className="text-4xl font-bold mb-12 flex justify-center items-center gap-3 text-[#2E4D3A]">
-    <span className="text-4xl">🍀</span> Plant Categories
-  </h1>
+        ref={categoriesRef}
+        className="relative z-10 mt-20 bg-[#E8EEE7] py-20 text-center text-green-900 rounded-t-[3rem] shadow-inner"
+      >
+        <h1 className="text-4xl font-bold mb-12 flex justify-center items-center gap-3 text-[#2E4D3A]">
+          <span className="text-4xl">🍀</span> Plant Categories
+        </h1>
 
-  <div className="flex flex-col md:flex-row justify-center gap-10 px-6">
-    {/* indoor plant */}
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden w-full md:w-1/3 border border-green-100 hover:shadow-2xl transition">
-      <img
-        src={bgIndoor}
-        alt="Indoor Plants"
-        className="object-cover w-full h-64 hover:scale-105 transition duration-500"
-      />
-      <div className="p-6">
-        <h2 className="text-2xl font-semibold text-[#2E4D3A] mb-4">Indoor Plants</h2>
-        <button className="bg-[#4C763B] text-white font-medium tracking-wide px-6 py-2 rounded-full hover:bg-[#3a5e2f] transition shadow-md hover:shadow-lg">
-          Browse Indoor Plants
-        </button>
-      </div>
-    </div>
+        <div className="flex flex-col md:flex-row justify-center gap-10 px-6">
+          {/*  Indoor Plants */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden w-full md:w-1/3 border border-green-100 hover:shadow-2xl transition">
+            <img
+              src={bgIndoor}
+              alt="Indoor Plants"
+              className="object-cover w-full h-64 hover:scale-105 transition duration-500"
+            />
+            <div className="p-6">
+              <h2 className="text-2xl font-semibold text-[#2E4D3A] mb-4">Indoor Plants</h2>
+              <Link
+                to="/indoor"
+                className="inline-block bg-[#4C763B] text-white font-medium tracking-wide px-6 py-2 rounded-full hover:bg-[#3a5e2f] transition shadow-md hover:shadow-lg"
+              >
+                Browse Indoor Plants
+              </Link>
+            </div>
+          </div>
 
-    {/* outdoor plant */}
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden w-full md:w-1/3 border border-green-100 hover:shadow-2xl transition">
-      <img
-        src={bgOutdoor}
-        alt="Outdoor Plants"
-        className="object-cover w-full h-64 hover:scale-105 transition duration-500"
-      />
-      <div className="p-6">
-        <h2 className="text-2xl font-semibold text-[#2E4D3A] mb-4">Outdoor Plants</h2>
-        <button className="bg-[#4C763B] text-white font-medium tracking-wide px-6 py-2 rounded-full hover:bg-[#3a5e2f] transition shadow-md hover:shadow-lg">
-          Browse Outdoor Plants
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
+          {/*  Outdoor Plants */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden w-full md:w-1/3 border border-green-100 hover:shadow-2xl transition">
+            <img
+              src={bgOutdoor}
+              alt="Outdoor Plants"
+              className="object-cover w-full h-64 hover:scale-105 transition duration-500"
+            />
+            <div className="p-6">
+              <h2 className="text-2xl font-semibold text-[#2E4D3A] mb-4">Outdoor Plants</h2>
+              <Link
+                to="/outdoor"
+                className="inline-block bg-[#4C763B] text-white font-medium tracking-wide px-6 py-2 rounded-full hover:bg-[#3a5e2f] transition shadow-md hover:shadow-lg"
+              >
+                Browse Outdoor Plants
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

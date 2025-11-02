@@ -4,6 +4,8 @@ import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories";
+import IndoorPlants from "./pages/IndoorPlants";
+import PlantDetail from "./pages/PlantDetail";
 
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
         <Route path="/login" element={<LogIn />} />
         <Route path="/home" element={<Home />} />
         <Route path="/categories" element={<Categories />} />
+        <Route path="/indoor" element={<IndoorPlants />} />
+        <Route path="/plants/:id" element={<PlantDetail />} />
       </Routes>
     </Router>
   );
