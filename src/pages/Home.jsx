@@ -37,7 +37,10 @@ export default function Home() {
           </div>
           <div className="flex space-x-4 text-lg">
             <FaSearch className="hover:text-green-300 cursor-pointer" />
-            <FaHeart className="hover:text-green-300 cursor-pointer" />
+            <FaHeart
+            onClick={() => navigate("/favorites")}
+            className="hover:text-green-300 cursor-pointer transition duration-300"
+             />
           </div>
         </nav>
 

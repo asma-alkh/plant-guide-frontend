@@ -7,6 +7,8 @@ import Categories from "./pages/Categories";
 import IndoorPlants from "./pages/IndoorPlants";
 import OutdoorPlants from "./pages/OutdoorPlants";
 import PlantDetail from "./pages/PlantDetail";
+import Favorites from "./pages/Favorites";
+
 
 
 function App() {
@@ -21,6 +23,7 @@ function App() {
         <Route path="/indoor" element={<IndoorPlants />} />
         <Route path="/outdoor" element={<OutdoorPlants />} />
         <Route path="/plants/:id" element={<PlantDetail />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </Router>
   );
