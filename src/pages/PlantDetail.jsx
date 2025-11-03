@@ -31,7 +31,7 @@ export default function PlantDetail() {
     try {
       const response = await axios.post(
         `${API_URL}/favorites/`,
-        { plant_id: plant.id }, // ✅ مهم جدًا
+        { plant_id: plant.id }, 
         {
           headers: { Authorization: `Bearer ${token}` },
         }

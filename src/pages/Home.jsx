@@ -1,6 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { FaSearch, FaHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import axios from "axios";
+import API_URL from "../api/config";
 import bgImage from "../assets/bgImage/plant5.jpg";
 import bgIndoor from "../assets/bgImage/indoor.jpg";
 import bgOutdoor from "../assets/bgImage/outdoor.jpg";
@@ -8,12 +10,19 @@ import bgOutdoor from "../assets/bgImage/outdoor.jpg";
 export default function Home() {
   const navigate = useNavigate();
   const categoriesRef = useRef(null);
+  const [soils, setSoils] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
-    if (!token) {
-      navigate("/login");
-    }
+    if (!token) navigate("/login");
+
+    axios
+      .get(`${API_URL}/soils/`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => setSoils(res.data))
+      .catch(() => setError("❌ Failed to load soil types."));
   }, [navigate]);
 
   const scrollToCategories = () => {
@@ -134,6 +143,37 @@ export default function Home() {
                 Browse Outdoor Plants
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+      {/* Soil section */}
+      <section
+        className="relative z-10 py-20 text-center text-green-900 rounded-t-[3rem] shadow-inner bg-cover bg-center"
+        style={{ backgroundImage: `url(${bgImage})` }}
+      >
+        <div className="absolute inset-0 bg-white/50 backdrop-blur-sm"></div>
+        <div className="relative z-10">
+          <h1 className="text-4xl font-bold mb-12 flex justify-center items-center gap-3 text-[#2E4D3A]">
+            Soil Types
+          </h1>
+
+          {error && <p className="text-red-500">{error}</p>}
+
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 px-8">
+            {soils.map((soil) => (
+              <div
+                key={soil.id}
+                className="bg-white/80 rounded-2xl shadow-lg p-6 hover:shadow-2xl transition duration-300 backdrop-blur-md"
+              >
+                <h2 className="text-2xl font-semibold text-[#2E4D3A] mb-3">
+                  {soil.name}
+                </h2>
+                <p className="text-gray-700 text-sm mb-3">{soil.description}</p>
+                <p className="text-green-800 text-sm font-medium">
+                  <strong> Mixture:</strong> {soil.mixture_of}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
