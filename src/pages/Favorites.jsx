@@ -10,7 +10,8 @@ export default function Favorites() {
   useEffect(() => {
     const token = localStorage.getItem("access_token");
 
-    axios.get(`${API_URL}/favorites/`, {
+    axios
+      .get(`${API_URL}/favorites/`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setFavorites(res.data))
@@ -20,7 +21,8 @@ export default function Favorites() {
   const handleRemove = (id) => {
     const token = localStorage.getItem("access_token");
 
-    axios.delete(`${API_URL}/favorites/${id}/`, {
+    axios
+      .delete(`${API_URL}/favorites/${id}/`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
@@ -55,15 +57,18 @@ export default function Favorites() {
                 </h2>
 
                 <div className="flex justify-center gap-3">
+                  {/* زر التفاصيل */}
                   <Link
                     to={`/plants/${fav.plant.id}`}
-                    className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-green-700 transition"
+                    className="bg-[#658C58] text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#4e6d47] transition duration-300 shadow-md"
                   >
                     View Details
                   </Link>
+
+                  {/* زر الحذف */}
                   <button
                     onClick={() => handleRemove(fav.id)}
-                    className="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-red-600 transition"
+                    className="bg-[#A72703] text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#821c02] transition duration-300 shadow-md"
                   >
                     Remove
                   </button>

@@ -34,10 +34,9 @@ export default function IndoorPlants() {
     plant.name.toLowerCase().includes(search.toLowerCase())
   );
 
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-green-100 py-16 px-8">
-            {/*  Back to home */}
+      {/*  Back to home */}
       <div className="flex justify-start mb-6">
         <Link
           to="/home"
@@ -47,7 +46,7 @@ export default function IndoorPlants() {
         </Link>
       </div>
       <h1 className="text-4xl font-bold text-green-800 text-center mb-10">
-         Indoor Plants
+        Indoor Plants
       </h1>
 
       <div className="flex justify-center mb-10">
@@ -61,7 +60,6 @@ export default function IndoorPlants() {
       </div>
 
       {error && <p className="text-red-500 text-center">{error}</p>}
-
 
       <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {filteredPlants.length > 0 ? (

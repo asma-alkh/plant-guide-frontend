@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom"; 
+import { useNavigate, Link } from "react-router-dom";
 import { FaSearch, FaHeart } from "react-icons/fa";
 import bgImage from "../assets/bgImage/plant5.jpg";
 import bgIndoor from "../assets/bgImage/indoor.jpg";
@@ -30,17 +30,21 @@ export default function Home() {
         {/* Navbar */}
         <nav className="flex justify-between items-center border-b border-white/20 pb-4">
           <div className="flex space-x-6 text-sm font-semibold tracking-wide">
-            <a href="#" className="hover:text-green-200">ABOUT</a>
-            <a href="#" className="hover:text-green-200">SOILS</a>
-            <a href="#" className="hover:text-green-200">CONTACT</a>
-            <a href="#" className="hover:text-green-200">S</a>
+            <a href="#" className="hover:text-green-200">
+              SOILS
+            </a>
+            <a href="#" className="hover:text-green-200">
+              CONTACT
+            </a>
+            <a href="#" className="hover:text-green-200">
+              S
+            </a>
           </div>
           <div className="flex space-x-4 text-lg">
-            <FaSearch className="hover:text-green-300 cursor-pointer" />
             <FaHeart
-            onClick={() => navigate("/favorites")}
-            className="hover:text-green-300 cursor-pointer transition duration-300"
-             />
+              onClick={() => navigate("/favorites")}
+              className="hover:text-green-300 cursor-pointer transition duration-300"
+            />
           </div>
         </nav>
 
@@ -61,9 +65,13 @@ export default function Home() {
               Your guide to caring for your plants
             </h2>
             <p className="text-green-50 leading-relaxed mb-8 max-w-md">
-              Discover the ideal soil, watering schedule, and sunlight requirements for each plant.  
-              Whether you’re a beginner or a plant lover, <span className="font-semibold text-green-200">Plant Guide</span> helps you  
-              create a greener and more vibrant space. Explore detailed info about indoor and outdoor plants, and keep track of your favorites easily.
+              Discover the ideal soil, watering schedule, and sunlight
+              requirements for each plant. Whether you’re a beginner or a plant
+              lover,{" "}
+              <span className="font-semibold text-green-200">Plant Guide</span>{" "}
+              helps you create a greener and more vibrant space. Explore
+              detailed info about indoor and outdoor plants, and keep track of
+              your favorites easily.
             </p>
 
             <div className="flex gap-5">
@@ -96,7 +104,9 @@ export default function Home() {
               className="object-cover w-full h-64 hover:scale-105 transition duration-500"
             />
             <div className="p-6">
-              <h2 className="text-2xl font-semibold text-[#2E4D3A] mb-4">Indoor Plants</h2>
+              <h2 className="text-2xl font-semibold text-[#2E4D3A] mb-4">
+                Indoor Plants
+              </h2>
               <Link
                 to="/indoor"
                 className="inline-block bg-[#4C763B] text-white font-medium tracking-wide px-6 py-2 rounded-full hover:bg-[#3a5e2f] transition shadow-md hover:shadow-lg"
@@ -114,7 +124,9 @@ export default function Home() {
               className="object-cover w-full h-64 hover:scale-105 transition duration-500"
             />
             <div className="p-6">
-              <h2 className="text-2xl font-semibold text-[#2E4D3A] mb-4">Outdoor Plants</h2>
+              <h2 className="text-2xl font-semibold text-[#2E4D3A] mb-4">
+                Outdoor Plants
+              </h2>
               <Link
                 to="/outdoor"
                 className="inline-block bg-[#4C763B] text-white font-medium tracking-wide px-6 py-2 rounded-full hover:bg-[#3a5e2f] transition shadow-md hover:shadow-lg"

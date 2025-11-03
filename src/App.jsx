@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Landing from "./pages/Landing"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Landing from "./pages/Landing";
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import Home from "./pages/Home";
@@ -8,8 +8,6 @@ import IndoorPlants from "./pages/IndoorPlants";
 import OutdoorPlants from "./pages/OutdoorPlants";
 import PlantDetail from "./pages/PlantDetail";
 import Favorites from "./pages/Favorites";
-
-
 
 function App() {
   return (
@@ -29,4 +27,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
