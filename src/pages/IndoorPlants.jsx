@@ -33,8 +33,18 @@ export default function IndoorPlants() {
     plant.name.toLowerCase().includes(search.toLowerCase())
   );
 
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-green-100 py-16 px-8">
+            {/* 🔙 زر العودة إلى الهوم */}
+      <div className="flex justify-start mb-6">
+        <Link
+          to="/home"
+          className="bg-[#4C763B] text-white px-5 py-2 rounded-full font-medium hover:bg-[#3a5e2f] transition shadow-md"
+        >
+          ← Back to Home
+        </Link>
+      </div>
       <h1 className="text-4xl font-bold text-green-800 text-center mb-10">
          Indoor Plants
       </h1>
