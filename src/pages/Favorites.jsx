@@ -10,8 +10,7 @@ export default function Favorites() {
   useEffect(() => {
     const token = localStorage.getItem("access_token");
 
-    axios
-      .get(`${API_URL}/favorites/`, {
+    axios.get(`${API_URL}/favorites/`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setFavorites(res.data))
@@ -21,8 +20,7 @@ export default function Favorites() {
   const handleRemove = (id) => {
     const token = localStorage.getItem("access_token");
 
-    axios
-      .delete(`${API_URL}/favorites/${id}/`, {
+    axios.delete(`${API_URL}/favorites/${id}/`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {

@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import API_URL from "../api/config";
+import { FaHeart } from "react-icons/fa";
 
 export default function PlantDetail() {
   const { id } = useParams();
+  const [isFavorite, setIsFavorite] = useState(false);
   const [plant, setPlant] = useState(null);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -24,30 +26,23 @@ export default function PlantDetail() {
         setError("Failed to load plant details ❌");
       });
   }, [id]);
-
-  const handleAddFavorite = async () => { 
-    const token = localStorage.getItem("access_token");
-  
-
+  const handleAddFavorite = async () => {
+  const token = localStorage.getItem("access_token");
   try {
     const response = await axios.post(
       `${API_URL}/favorites/`,
-      {plant: plant.id}, 
+      { plant_id: plant.id }, // ✅ مهم جدًا
       {
-        headers: {Authorization: `Bearer ${token}`}
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
-    setMessage(" ✅ Added to favorites successfully")
-
+    setMessage("✅ Added to favorites successfully!");
+    setIsFavorite(true);
   } catch (err) {
     console.error(err);
-    setMessage(("❌ This plant is already in your favorites!"))
-  } else {
-    setMessage("⚠️ Something went wrong. Please try again later.");
-    
-
+    setMessage("❌ This plant is already in your favorites!");
   }
-  }
+};
 
   if (error)
     return (
@@ -92,11 +87,15 @@ export default function PlantDetail() {
           </div>
           {/* Favorite button */}
           <div className="flex gap-4">
-            <button 
+            <button
             onClick={handleAddFavorite}
-            className="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition">
-              ❤️ Add to Favorites
-            </button>
+            className={`w-12 h-12 flex items-center justify-center rounded-full border-2 transition 
+            ${isFavorite ? "border-green-500 bg-green-100 text-green-600" : "border-gray-300 bg-white text-gray-400"}
+            hover:scale-110 duration-300`}
+            title={isFavorite ? "Added to Favorites" : "Add to Favorites"}
+            >
+              <FaHeart size={22} className={isFavorite ? "text-green-600" : "text-gray-400"} />
+              </button>
           </div>
           <Link
           to={
