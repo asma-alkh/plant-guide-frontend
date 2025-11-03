@@ -18,7 +18,7 @@ export default function OutdoorPlants() {
         },
       })
       .then((res) => {
-        // ✅ نعرض فقط النباتات الخارجية
+        // Show Outdoor plants 
         const outdoorPlants = res.data.filter(
           (plant) => plant.category === "Outdoor Plants"
         );
@@ -37,7 +37,7 @@ export default function OutdoorPlants() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-green-100 py-16 px-8">
 
-      {/* 🔙 زر العودة إلى الهوم */}
+      {/* button back to home */}
       <div className="flex justify-start mb-6">
         <Link
           to="/home"
@@ -51,7 +51,7 @@ export default function OutdoorPlants() {
         🌻 Outdoor Plants
       </h1>
 
-      {/* 🔍 شريط البحث */}
+      {/*  Search */}
       <div className="flex justify-center mb-10">
         <input
           type="text"
@@ -62,10 +62,10 @@ export default function OutdoorPlants() {
         />
       </div>
 
-      {/* ⚠️ رسالة الخطأ */}
+      {/* Error message */}
       {error && <p className="text-red-500 text-center">{error}</p>}
 
-      {/* 🪴 قائمة النباتات */}
+      {/* list plants*/}
       <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {filteredPlants.length > 0 ? (
           filteredPlants.map((plant) => (

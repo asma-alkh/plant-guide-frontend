@@ -18,6 +18,7 @@ export default function IndoorPlants() {
         },
       })
       .then((res) => {
+        // Show indoor plants
         const indoorPlants = res.data.filter(
           (plant) => plant.category === "Indoor Plants"
         );
@@ -36,7 +37,7 @@ export default function IndoorPlants() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-green-100 py-16 px-8">
-            {/* 🔙 زر العودة إلى الهوم */}
+            {/*  Back to home */}
       <div className="flex justify-start mb-6">
         <Link
           to="/home"
