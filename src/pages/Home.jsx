@@ -10,6 +10,7 @@ import bgOutdoor from "../assets/bgImage/outdoor.jpg";
 export default function Home() {
   const navigate = useNavigate();
   const categoriesRef = useRef(null);
+  const soilRef = useRef(null);
   const [soils, setSoils] = useState([]);
   const [error, setError] = useState("");
 
@@ -29,6 +30,10 @@ export default function Home() {
     categoriesRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToSoil = () => {
+    soilRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div
       className="min-h-screen bg-cover bg-center text-white relative"
@@ -39,9 +44,9 @@ export default function Home() {
         {/* Navbar */}
         <nav className="flex justify-between items-center border-b border-white/20 pb-4">
           <div className="flex space-x-6 text-sm font-semibold tracking-wide">
-            <a href="#" className="hover:text-green-200">
+            <button onClick={scrollToSoil} className="hover:text-green-200">
               SOILS
-            </a>
+            </button>
             <a href="#" className="hover:text-green-200">
               CONTACT
             </a>
@@ -148,6 +153,7 @@ export default function Home() {
       </section>
       {/* Soil section */}
       <section
+        ref={soilRef}
         className="relative z-10 py-20 text-center text-green-900 rounded-t-[3rem] shadow-inner bg-cover bg-center"
         style={{ backgroundImage: `url(${bgImage})` }}
       >
