@@ -7,6 +7,7 @@ export default function PlantDetail() {
   const { id } = useParams();
   const [plant, setPlant] = useState(null);
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -23,6 +24,30 @@ export default function PlantDetail() {
         setError("Failed to load plant details ❌");
       });
   }, [id]);
+
+  const handleAddFavorite = async () => { 
+    const token = localStorage.getItem("access_token");
+  
+
+  try {
+    const response = await axios.post(
+      `${API_URL}/favorites/`,
+      {plant: plant.id}, 
+      {
+        headers: {Authorization: `Bearer ${token}`}
+      }
+    );
+    setMessage(" ✅ Added to favorites successfully")
+
+  } catch (err) {
+    console.error(err);
+    setMessage(("❌ This plant is already in your favorites!"))
+  } else {
+    setMessage("⚠️ Something went wrong. Please try again later.");
+    
+
+  }
+  }
 
   if (error)
     return (
@@ -65,6 +90,14 @@ export default function PlantDetail() {
               {plant.watering_frequency || "Not specified"}
             </p>
           </div>
+          {/* Favorite button */}
+          <div className="flex gap-4">
+            <button 
+            onClick={handleAddFavorite}
+            className="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition">
+              ❤️ Add to Favorites
+            </button>
+          </div>
           <Link
           to={
             plant.category === "Outdoor Plants" || plant.category === 2
@@ -75,6 +108,12 @@ export default function PlantDetail() {
             ← Back to Plants
             </Link>
         </div>
+        {/* Message after add to favorite */}
+        {message && (
+          <p className="text-center mt-4 text-green-700 font-medium">
+            {message}
+          </p>
+        )}
       </div>
     </div>
   );
