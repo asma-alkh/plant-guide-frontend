@@ -57,7 +57,7 @@ export default function Favorites() {
                 </h2>
 
                 <div className="flex justify-center gap-3">
-                  {/* زر التفاصيل */}
+                  {/* detail button */}
                   <Link
                     to={`/plants/${fav.plant.id}`}
                     className="bg-[#658C58] text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#4e6d47] transition duration-300 shadow-md"
@@ -65,7 +65,7 @@ export default function Favorites() {
                     View Details
                   </Link>
 
-                  {/* زر الحذف */}
+                  {/* remove button */}
                   <button
                     onClick={() => handleRemove(fav.id)}
                     className="bg-[#A72703] text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#821c02] transition duration-300 shadow-md"
