@@ -4,7 +4,6 @@ import { FaHeart } from "react-icons/fa";
 import { FiUser, FiLogOut } from "react-icons/fi";
 import axios from "axios";
 import API_URL from "../api/config";
-
 import bgImage from "../assets/bgImage/plant5.jpg";
 import bgIndoor from "../assets/bgImage/indoor.jpg";
 import bgOutdoor from "../assets/bgImage/outdoor.jpg";
@@ -13,18 +12,17 @@ export default function Home() {
   const navigate = useNavigate();
   const categoriesRef = useRef(null);
   const soilRef = useRef(null);
-  const contactRef = useRef(null); // ✅ لإضافة قسم التواصل لاحقًا إن رغبتِ
+  const contactRef = useRef(null);
 
   const [soils, setSoils] = useState([]);
   const [error, setError] = useState("");
 
-  // 🔹 تسجيل الخروج
+  // log out 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     navigate("/login");
   };
 
-  // 🔹 جلب أنواع التربة من API
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (!token) navigate("/login");
@@ -37,7 +35,7 @@ export default function Home() {
       .catch(() => setError("❌ Failed to load soil types."));
   }, [navigate]);
 
-  // 🔹 دوال التمرير السلس للأقسام
+
   const scrollToCategories = () => {
     categoriesRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -57,11 +55,8 @@ export default function Home() {
     >
       {/* تدرج خلفي */}
       <div className="absolute inset-0 bg-black/30"></div>
-
-      {/* ✅ Navbar داخل الصفحة */}
       <nav className="fixed top-0 left-0 w-full bg-white/15 backdrop-blur-md border-b border-white/20 shadow-lg z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center px-8 py-4">
-          {/* روابط التنقل */}
           <div className="flex space-x-8 text-sm font-semibold tracking-wide text-white">
             <button
               onClick={scrollToSoil}
@@ -82,8 +77,7 @@ export default function Home() {
               Schedule
             </button>
           </div>
-
-          {/* أيقونات المفضلة + البروفايل + تسجيل الخروج */}
+          {/* log out profile and favorite  */}
           <div className="flex items-center gap-5">
             <button
               onClick={() => navigate("/favorites")}
@@ -111,10 +105,9 @@ export default function Home() {
           </div>
         </div>
       </nav>
-      {/* 🌿 محتوى التعريف داخل مربع زجاجي */}
       <div className="relative z-10 flex justify-center items-center pt-40 px-6">
         <div className="bg-white/15 backdrop-blur-md rounded-3xl shadow-2xl border border-white/20 p-10 max-w-6xl w-full flex flex-col md:flex-row items-center gap-10">
-          {/* صورة جانبية */}
+
           <div className="w-full md:w-1/2 rounded-2xl overflow-hidden shadow-lg">
             <img
               src={bgImage}
@@ -122,8 +115,6 @@ export default function Home() {
               className="object-cover w-full h-[400px] lg:aspect-square opacity-90 hover:opacity-100 transition duration-500"
             />
           </div>
-
-          {/* النص التعريفي */}
           <div className="w-full md:w-1/2 text-left text-white">
             <h1 className="text-6xl font-extrabold mb-4 drop-shadow-md">
               Plant Guide
@@ -151,7 +142,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 🪴 الأقسام */}
+      {/* indoor/ outdoor section */}
       <section
         ref={categoriesRef}
         className="relative z-10 mt-20 bg-[#E8EEE7] py-20 text-center text-green-900 rounded-t-[3rem] shadow-inner"
@@ -203,7 +194,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🌱 قسم التربة */}
+      {/* soil section */}
       <section
         ref={soilRef}
         className="relative z-10 py-20 text-center text-green-900 rounded-t-[3rem] shadow-inner bg-cover bg-center"
