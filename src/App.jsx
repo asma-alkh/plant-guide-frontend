@@ -10,7 +10,6 @@ import PlantDetail from "./pages/PlantDetail";
 import Favorites from "./pages/Favorites";
 import Schedule from "./pages/Schedule";
 
-
 function App() {
   return (
     <Router>

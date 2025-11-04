@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
+import { FiUser, FiLogOut } from "react-icons/fi";
 import axios from "axios";
 import API_URL from "../api/config";
+
 import bgImage from "../assets/bgImage/plant5.jpg";
 import bgIndoor from "../assets/bgImage/indoor.jpg";
 import bgOutdoor from "../assets/bgImage/outdoor.jpg";
@@ -11,9 +13,18 @@ export default function Home() {
   const navigate = useNavigate();
   const categoriesRef = useRef(null);
   const soilRef = useRef(null);
+  const contactRef = useRef(null); // ✅ لإضافة قسم التواصل لاحقًا إن رغبتِ
+
   const [soils, setSoils] = useState([]);
   const [error, setError] = useState("");
 
+  // 🔹 تسجيل الخروج
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    navigate("/login");
+  };
+
+  // 🔹 جلب أنواع التربة من API
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (!token) navigate("/login");
@@ -26,6 +37,7 @@ export default function Home() {
       .catch(() => setError("❌ Failed to load soil types."));
   }, [navigate]);
 
+  // 🔹 دوال التمرير السلس للأقسام
   const scrollToCategories = () => {
     categoriesRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -34,34 +46,76 @@ export default function Home() {
     soilRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToContact = () => {
+    contactRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div
       className="min-h-screen bg-cover bg-center text-white relative"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
+      {/* تدرج خلفي */}
       <div className="absolute inset-0 bg-black/30"></div>
-      <div className="relative z-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl w-[95%] max-w-[1400px] mx-auto p-10 mt-10 flex flex-col space-y-10">
-        {/* Navbar */}
-        <nav className="flex justify-between items-center border-b border-white/20 pb-4">
-          <div className="flex space-x-6 text-sm font-semibold tracking-wide">
-            <button onClick={scrollToSoil} className="hover:text-green-200">
+
+      {/* ✅ Navbar داخل الصفحة */}
+      <nav className="fixed top-0 left-0 w-full bg-white/15 backdrop-blur-md border-b border-white/20 shadow-lg z-50">
+        <div className="max-w-6xl mx-auto flex justify-between items-center px-8 py-4">
+          {/* روابط التنقل */}
+          <div className="flex space-x-8 text-sm font-semibold tracking-wide text-white">
+            <button
+              onClick={scrollToSoil}
+              className="hover:text-green-200 transition-colors duration-200"
+            >
               SOILS
             </button>
-            <button onClick={scrollToSoil} className="hover:text-green-200">
+            <button
+              onClick={scrollToContact}
+              className="hover:text-green-200 transition-colors duration-200"
+            >
               CONTACT
             </button>
-            <a onClick={() => navigate("/schedule")}>Schedule</a>
+            <button
+              onClick={() => navigate("/schedule")}
+              className="hover:text-green-200 cursor-pointer transition-colors duration-200"
+            >
+              Schedule
+            </button>
           </div>
-          <div className="flex space-x-4 text-lg">
-            <FaHeart
-              onClick={() => navigate("/favorites")}
-              className="hover:text-green-300 cursor-pointer transition duration-300"
-            />
-          </div>
-        </nav>
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-10">
-          <div className="w-full md:w-1/2 bg-white/10 rounded-xl overflow-hidden shadow-lg">
+          {/* أيقونات المفضلة + البروفايل + تسجيل الخروج */}
+          <div className="flex items-center gap-5">
+            <button
+              onClick={() => navigate("/favorites")}
+              className="text-2xl text-red-500 hover:text-red-600 hover:scale-110 transition-transform duration-200"
+              title="Favorites"
+            >
+              <FaHeart />
+            </button>
+
+            <button
+              onClick={() => navigate("/profile")}
+              className="text-2xl text-green-400 hover:text-green-600 hover:scale-110 transition-transform duration-200"
+              title="Profile"
+            >
+              <FiUser />
+            </button>
+
+            <button
+              onClick={handleLogout}
+              className="text-2xl text-red-500 hover:text-red-700 hover:scale-110 transition-transform duration-200"
+              title="Log Out"
+            >
+              <FiLogOut />
+            </button>
+          </div>
+        </div>
+      </nav>
+      {/* 🌿 محتوى التعريف داخل مربع زجاجي */}
+      <div className="relative z-10 flex justify-center items-center pt-40 px-6">
+        <div className="bg-white/15 backdrop-blur-md rounded-3xl shadow-2xl border border-white/20 p-10 max-w-6xl w-full flex flex-col md:flex-row items-center gap-10">
+          {/* صورة جانبية */}
+          <div className="w-full md:w-1/2 rounded-2xl overflow-hidden shadow-lg">
             <img
               src={bgImage}
               alt="Plant example"
@@ -69,8 +123,9 @@ export default function Home() {
             />
           </div>
 
-          <div className="w-full md:w-1/2 text-left">
-            <h1 className="text-6xl font-extrabold mb-4 text-white drop-shadow-md">
+          {/* النص التعريفي */}
+          <div className="w-full md:w-1/2 text-left text-white">
+            <h1 className="text-6xl font-extrabold mb-4 drop-shadow-md">
               Plant Guide
             </h1>
             <h2 className="text-xl text-green-100 mb-3">
@@ -86,19 +141,17 @@ export default function Home() {
               your favorites easily.
             </p>
 
-            <div className="flex gap-5">
-              <button
-                onClick={scrollToCategories}
-                className="relative z-50 bg-[#4C763B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#3a5e2f] transition shadow-lg"
-              >
-                Explore Plants
-              </button>
-            </div>
+            <button
+              onClick={scrollToCategories}
+              className="bg-[#4C763B] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#3a5e2f] transition shadow-lg"
+            >
+              Explore Plants
+            </button>
           </div>
         </div>
       </div>
 
-      {/*(Categories Section) */}
+      {/* 🪴 الأقسام */}
       <section
         ref={categoriesRef}
         className="relative z-10 mt-20 bg-[#E8EEE7] py-20 text-center text-green-900 rounded-t-[3rem] shadow-inner"
@@ -108,7 +161,7 @@ export default function Home() {
         </h1>
 
         <div className="flex flex-col md:flex-row justify-center gap-10 px-6">
-          {/*  Indoor Plants */}
+          {/* Indoor */}
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden w-full md:w-1/3 border border-green-100 hover:shadow-2xl transition">
             <img
               src={bgIndoor}
@@ -128,7 +181,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/*  Outdoor Plants */}
+          {/* Outdoor */}
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden w-full md:w-1/3 border border-green-100 hover:shadow-2xl transition">
             <img
               src={bgOutdoor}
@@ -149,7 +202,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* Soil section */}
+
+      {/* 🌱 قسم التربة */}
       <section
         ref={soilRef}
         className="relative z-10 py-20 text-center text-green-900 rounded-t-[3rem] shadow-inner bg-cover bg-center"
@@ -174,7 +228,7 @@ export default function Home() {
                 </h2>
                 <p className="text-gray-700 text-sm mb-3">{soil.description}</p>
                 <p className="text-green-800 text-sm font-medium">
-                  <strong> Mixture:</strong> {soil.mixture_of}
+                  <strong>Mixture:</strong> {soil.mixture_of}
                 </p>
               </div>
             ))}
