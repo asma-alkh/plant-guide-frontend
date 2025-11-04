@@ -47,12 +47,10 @@ export default function Home() {
             <button onClick={scrollToSoil} className="hover:text-green-200">
               SOILS
             </button>
-            <a href="#" className="hover:text-green-200">
+            <button onClick={scrollToSoil} className="hover:text-green-200">
               CONTACT
-            </a>
-            <a href="#" className="hover:text-green-200">
-              S
-            </a>
+            </button>
+            <a onClick={() => navigate("/schedule")}>Schedule</a>
           </div>
           <div className="flex space-x-4 text-lg">
             <FaHeart

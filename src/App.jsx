@@ -8,6 +8,8 @@ import IndoorPlants from "./pages/IndoorPlants";
 import OutdoorPlants from "./pages/OutdoorPlants";
 import PlantDetail from "./pages/PlantDetail";
 import Favorites from "./pages/Favorites";
+import Schedule from "./pages/Schedule";
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         <Route path="/outdoor" element={<OutdoorPlants />} />
         <Route path="/plants/:id" element={<PlantDetail />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/schedule" element={<Schedule />} />
       </Routes>
     </Router>
   );
