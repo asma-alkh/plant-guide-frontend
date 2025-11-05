@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import bgImage from "../assets/bgImage/plant5.jpg";
+// Reference sources: 
+//https://youtu.be/c-QsfbznSXI?si=CXhxzJm63achRhYt
 
 export default function Landing() {
   return (
