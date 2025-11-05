@@ -9,6 +9,8 @@ import OutdoorPlants from "./pages/OutdoorPlants";
 import PlantDetail from "./pages/PlantDetail";
 import Favorites from "./pages/Favorites";
 import Schedule from "./pages/Schedule";
+import Profile from "./pages/Profile";
+
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
         <Route path="/plants/:id" element={<PlantDetail />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/schedule" element={<Schedule />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

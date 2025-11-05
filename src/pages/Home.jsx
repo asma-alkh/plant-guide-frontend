@@ -74,7 +74,7 @@ export default function Home() {
               onClick={() => navigate("/schedule")}
               className="hover:text-green-200 cursor-pointer transition-colors duration-200"
             >
-              Schedule
+              SCHEDULE
             </button>
           </div>
           {/* log out profile and favorite  */}
