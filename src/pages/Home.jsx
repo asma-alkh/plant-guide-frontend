@@ -17,7 +17,7 @@ export default function Home() {
   const [soils, setSoils] = useState([]);
   const [error, setError] = useState("");
 
-  // log out 
+  // log out
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     navigate("/login");
@@ -34,7 +34,6 @@ export default function Home() {
       .then((res) => setSoils(res.data))
       .catch(() => setError("❌ Failed to load soil types."));
   }, [navigate]);
-
 
   const scrollToCategories = () => {
     categoriesRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -53,23 +52,17 @@ export default function Home() {
       className="min-h-screen bg-cover bg-center text-white relative"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      {/* تدرج خلفي */}
       <div className="absolute inset-0 bg-black/30"></div>
       <nav className="fixed top-0 left-0 w-full bg-white/15 backdrop-blur-md border-b border-white/20 shadow-lg z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center px-8 py-4">
-          <div className="flex space-x-8 text-sm font-semibold tracking-wide text-white">
+          <div className="flex items-center space-x-6 text-sm font-semibold tracking-wide text-white">
             <button
               onClick={scrollToSoil}
               className="hover:text-green-200 transition-colors duration-200"
             >
               SOILS
             </button>
-            <button
-              onClick={scrollToContact}
-              className="hover:text-green-200 transition-colors duration-200"
-            >
-              CONTACT
-            </button>
+
             <button
               onClick={() => navigate("/schedule")}
               className="hover:text-green-200 cursor-pointer transition-colors duration-200"
@@ -107,7 +100,6 @@ export default function Home() {
       </nav>
       <div className="relative z-10 flex justify-center items-center pt-40 px-6">
         <div className="bg-white/15 backdrop-blur-md rounded-3xl shadow-2xl border border-white/20 p-10 max-w-6xl w-full flex flex-col md:flex-row items-center gap-10">
-
           <div className="w-full md:w-1/2 rounded-2xl overflow-hidden shadow-lg">
             <img
               src={bgImage}

@@ -11,7 +11,6 @@ import Favorites from "./pages/Favorites";
 import Schedule from "./pages/Schedule";
 import Profile from "./pages/Profile";
 
-
 function App() {
   return (
     <Router>
